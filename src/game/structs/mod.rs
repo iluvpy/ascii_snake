@@ -1,4 +1,6 @@
 
+
+#[derive(PartialEq, Clone, Copy)]
 pub enum Direction {
 	Left,
 	Right,
@@ -6,12 +8,15 @@ pub enum Direction {
 	Down
 }
 
+
+
+#[derive(Copy, Clone)]
 pub struct Point {
 	pub x: usize,
-	pub y: usize
+	pub y: usize 
 }
 
-#[derive(Clone)]
+#[derive(PartialEq ,Copy, Clone)]
 pub enum GridState {
 	None,
 	SnakeBody,

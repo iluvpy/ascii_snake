@@ -6,12 +6,21 @@ pub fn draw_grid(grid: &Vec<Vec<GridState>>) {
 			let char_: char = match state {
 				GridState::SnakeBody => '🟩',
 				GridState::Apple => '🟥',
+				GridState::SnakeHead => '🟢',
 				_ => '⬜',
 			};
 			print!("{}", char_);
 
 		}
 		print!("\n");
+	}
+}
+
+pub fn clear_grid(grid: &mut Vec<Vec<GridState>>) {
+	for i in 0..grid.len() {
+		for j in 0..grid[i].len() {
+			grid[i][j] = GridState::None;
+		}
 	}
 }
 
