@@ -1,11 +1,11 @@
 
 
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Clone, Copy, Debug)]
 pub enum Direction {
-	Left,
-	Right,
-	Up,
-	Down
+	Left = 97,
+	Right = 100,
+	Up = 119,
+	Down = 115
 }
 
 

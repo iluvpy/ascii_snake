@@ -7,3 +7,7 @@ pub fn add_apple(game_data: &mut GameData) {
 	let y = game_data.apple.y;
 	game_data.grid[y][x] = GridState::Apple;
 }	
+
+pub fn update_apple(game_data: &mut GameData) {
+	
+}

@@ -2,8 +2,6 @@ use super::structs::*;
 use super::structs::GridState;
 use super::GameData;
 
-use super::GRID_HEIGHT;
-use super::GRID_WIDTH;
 
 pub struct Snake {
 	pub body: Vec<Point>,
@@ -25,11 +23,18 @@ pub fn add_snake(game_data: &mut GameData) {
 }
 
 
-pub fn update_snake(snake: &mut Snake) {
-	let mut new = Point {
-		x: 10,
-		y: 0
+pub fn update_snake(game_data: &mut GameData) {
+	let mut snake = &mut game_data.snake;
+	let mut new = snake.head;
+	let char_: char = game_data.input.chars().nth(0).unwrap(); // get first char of input
+	snake.direction = match char_ {
+		'w' => Direction::Up,
+		's' => Direction::Down,
+		'd' => Direction::Right,
+		'a' => Direction::Left,
+		 _ => snake.direction,
 	};
+
 
 	let direction = snake.direction;
 	if direction == Direction::Up {
@@ -39,19 +44,18 @@ pub fn update_snake(snake: &mut Snake) {
 	} else if direction == Direction::Left {
 		new.x = snake.head.x - 1;
 	} else if direction == Direction::Right {
-		println!("direction is right");
 		new.x = snake.head.x + 1;
 	}
-	
-	else {println!("didnt move")};
-	
-	println!("updating snake!");
-	println!("new head pos: {} {}", new.x, new.y);
+
+	// move current element to the old position of the next element
+	let mut old = snake.head;
 	snake.head = new;
 	for i in 0..snake.body.len() {
 		let position_cpy = snake.body[i];
-		snake.body[i] = new;
-		new = position_cpy;
+		print!("settings old: {} {} ", snake.body[i].x, snake.body[i].y); // XXX remove later
+		snake.body[i] = old;
+		println!("to -> {} {}", old.x, old.y);
+		old = position_cpy;
 	}
 
 }
